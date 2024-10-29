@@ -1,8 +1,9 @@
 ## Sensor configurations for husky models
-The current default for the class is Sensor Config 4 with the following modifications:
+The current default for the class is Sensor Config 5 with the following modifications:
 
-1. Remove the spare D435i cameras to reduce bandwidth (TODO)
-2. Copy all components of MARBLE_HUSKY_SENSOR_CONFIG_4 folder to the main gazebo folder so it is properly sourced by the world sdf file. Move contents of the husky SDF model into the world model.
+1. Remove the left, right, and rear Blackfly cameras to reduce bandwidth. Only need the front camera for class purposes.
+2. Copy all components of MARBLE_HUSKY_SENSOR_CONFIG_5 folder to the main gazebo folder so it is properly sourced by the world sdf file. Move contents of the husky SDF model into the world model.
+3. Change one of the LIDARs to act as an ultrasonic range finder.
 
 ### MARBLE_HUSKY_SENSOR_CONFIG_1
 CU's husky config with 3 D435i RGBD cameras, a pan-tilt turret, the Ouster OS1 64 channel lidar, and an RPLidar S1

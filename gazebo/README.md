@@ -5,4 +5,6 @@ source ~/.bashrc
 ```
 
 Then gazebo with the class world using the command:
-`ign gazebo class-world.sdf`
+```
+ign gazebo class-world.sdf
+```

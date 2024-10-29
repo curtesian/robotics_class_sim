@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <sdf version='1.9'>
   <world name='industrial-warehouse'>
+    <!--  PLUGINS - world does not load when this happens -->
+    <plugin filename="libignition-gazebo-imu-system.so"
+      name="ignition::gazebo::systems::Imu">
+    </plugin>
+    <!-- WORLD PARAMS -->
     <gravity>0 0 -9.8</gravity>
     <physics name='default_physics' default='false' type='ode'>
       <max_step_size>0.01</max_step_size>
@@ -519,6 +524,7 @@
                           </z>
                       </linear_acceleration>
                   </imu>
+                  <topic>imu</topic>
           </sensor>
   
           <!-- Bottom cylinder of Ouster/Velodyne 3D Lidar -->

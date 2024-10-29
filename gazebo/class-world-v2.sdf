@@ -1,7 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <sdf version='1.9'>
   <world name='industrial-warehouse'>
-    <!--  PLUGINS - world does not load when this happens -->
+    <!--  PLUGINS -->
+    <plugin
+        filename="gz-sim-physics-system"
+        name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+        filename="gz-sim-scene-broadcaster-system"
+        name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
     <plugin filename="libignition-gazebo-imu-system.so"
       name="ignition::gazebo::systems::Imu">
     </plugin>

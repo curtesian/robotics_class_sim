@@ -281,6 +281,7 @@
           <pose>0.527 0.015 0.429 -1.344521 0.4763404 0.4653087</pose>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
+          <topic>tof/left</topic>
           <camera name="tof_left">
               <horizontal_fov>1.0821</horizontal_fov>
               <lens>
@@ -354,6 +355,7 @@
           <pose>0.527 -0.015 0.429 -1.7970717 0.4763404 -0.4653087</pose>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
+          <topic>tof/right</topic>
           <camera name="tof_right">
               <horizontal_fov>1.0821</horizontal_fov>
               <lens>
@@ -695,6 +697,7 @@
             <pose>0.5579 0.0 0.53718 0 0 0</pose>
             <always_on>1</always_on>
             <update_rate>10</update_rate>
+            <topic>camera/front</topic>
             <camera name="camera_front">
                 <horizontal_fov>1.39626</horizontal_fov>
                 <lens>

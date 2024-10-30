@@ -1,0 +1,13 @@
+model {
+  file: "model.sdf"
+  file_format {
+    version {
+      major: 1
+      minor: 6
+    }
+    name: "sdf"
+  }
+}
+name: "marble_husky_sensor_config_3"
+description: "CU\'s husky config with 3 D435i RGBD cameras, a pan-tilt turret, the Ouster OS1 64 channel lidar,\n     an RPLidar S1, and a Vividia HTI-301 LWIR thermal Camera"
+

@@ -17,3 +17,11 @@ Run gazebo with the class world using the command:
 ```
 ign gazebo class-world.sdf
 ```
+
+### TELEOP
+To enable teleop, enable the Key Publisher by hitting the vertical three ellipses in the top right of the GUI. Search for *Key Publisher* and select. The controls are:
+- **Up-arrow**: Forward
+- **Down-arrow**: Backward
+- **Left-arrow**: Left turn
+- **Right-arrow**: Right turn
+- **Ctrl key**: Stop motion 

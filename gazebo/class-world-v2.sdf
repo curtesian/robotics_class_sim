@@ -1073,6 +1073,23 @@
           <use_parent_model_frame>1</use_parent_model_frame>
         </axis>
       </joint>
+    
+    <!-- DRIVING -->
+    <!-- Husky is a 4 wheel skid steer drive system (TODO) -->
+    <!-- https://answers.ros.org/question/392970/libgazebo_ros_skid_steer_drive-syntax-for-urdf-in-ros2/ -->
+    <!-- New gazebo lumped this feature into Diff drive -->
+    <plugin
+      filename="gz-sim-diff-drive-system"
+      name="gz::sim::systems::DiffDrive">
+      <left_joint>front_left_wheel_joint</left_joint>
+      <left_joint>rear_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <right_joint>rear_right_wheel_joint</right_joint>
+      <wheel_separation>0.5708</wheel_separation>
+      <wheel_radius>0.1651</wheel_radius>
+      <odom_publish_frequency>1</odom_publish_frequency>
+      <topic>cmd_vel</topic>
+    </plugin>
   
     </model>
     <!-- WORLD MODELS -->
@@ -1104,7 +1121,8 @@
       <include>
         <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_GroundB_01</uri>
       </include>
-      <pose>0 0 -0.090092 0 -0 0</pose>
+      <!-- EDIT: Pose is shifted -z by wheel radius + previous pose (-0.090092)-->
+      <pose>0 0 -0.255192 0 -0 0</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
@@ -1208,5 +1226,56 @@
         <falloff>0</falloff>
       </spot>
     </light>
+    <!-- DRIVING WITH KEYBOARD -->
+    <!-- Moving Left-->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+        <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+            <match field="data">16777234</match>
+        </input>
+        <output type="gz.msgs.Twist" topic="/cmd_vel">
+            linear: {x: 0.0}, angular: {z: 1.0}
+        </output>
+    </plugin>
+    <!-- Moving Forward-->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+        <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+            <match field="data">16777235</match>
+        </input>
+        <output type="gz.msgs.Twist" topic="/cmd_vel">
+            linear: {x: 1.0}, angular: {z: 0.0}
+        </output>
+    </plugin>
+    <!-- Moving Right-->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+        <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+            <match field="data">16777236</match>
+        </input>
+        <output type="gz.msgs.Twist" topic="/cmd_vel">
+            linear: {x: 0.0}, angular: {z: -1.0}
+        </output>
+    </plugin>
+    <!-- Moving Backward-->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+        <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+            <match field="data">16777237</match>
+        </input>
+        <output type="gz.msgs.Twist" topic="/cmd_vel">
+            linear: {x: -1.0}, angular: {z: 0.0}
+        </output>
+    </plugin>
+    <!-- Stop Movement-->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+        <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+            <match field="data">16777249</match>
+        </input>
+        <output type="gz.msgs.Twist" topic="/cmd_vel">
+            linear: {x: 0.0}, angular: {z: 0.0}
+        </output>
+    </plugin>
   </world>
 </sdf>

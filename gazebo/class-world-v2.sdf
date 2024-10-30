@@ -218,6 +218,7 @@
         <sensor name="planar_laser" type="gpu_ray">
             <pose>0.485 0 0.166 0 -0 0</pose>
             <update_rate>20</update_rate>
+            <topic>planarlaser</topic>
             <lidar>
                 <scan>
                     <horizontal>
@@ -465,6 +466,7 @@
         </collision>
           <sensor name="imu_sensor" type="imu">
             <always_on>1</always_on>
+            <topic>imu</topic>
             <update_rate>200</update_rate>
             <imu>
                         <enable_orientation>0</enable_orientation>
@@ -539,7 +541,6 @@
                           </z>
                       </linear_acceleration>
                   </imu>
-                  <topic>imu</topic>
           </sensor>
   
           <!-- Bottom cylinder of Ouster/Velodyne 3D Lidar -->
@@ -611,7 +612,7 @@
             <visualize>0</visualize>
             <always_on>1</always_on>
             <topic>ultrasonic0</topic>
-            <update_rate>1</update_rate>
+            <update_rate>10</update_rate>
             <lidar>
               <scan>
                 <vertical>

@@ -85,3 +85,7 @@
   gz_topic_name: "/model/marble_husky_sensor_config_5/tf"
   ros_type_name: "tf2_msgs/msg/TFMessage"
   gz_type_name: "gz.msgs.Pose_V"
+
+# TODO: add fixed world frame if it is available in gz topics
+# Create parser maybe using this example:
+# https://github.com/gazebosim/ros_gz/blob/jazzy/ros_gz_sim_demos/launch/sdf_parser.launch.py

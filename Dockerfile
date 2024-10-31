@@ -4,11 +4,11 @@ FROM gazebo:latest
 CMD [ "gzserver", "my-gazebo-app-args" ]
 
 # Environment params
-ENV WS /root/dev
-ENV ROS_PATH $WS/ros2_ws
-ENV GAZEBO_PATH $WS/gazebo
-ENV ROS_DISTRIBUTION foxy
-ENV DEBIAN_FRONTEND noninteractive
+ENV WS=/root/dev
+ENV ROS_PATH=$WS/ros2_ws
+ENV GAZEBO_PATH=$WS/gazebo
+ENV ROS_DISTRIBUTION=foxy
+ENV DEBIAN_FRONTEND=noninteractive
 
 
 # Install essentials
@@ -55,23 +55,24 @@ RUN \
 		ninja-build \
 		pkg-config \
 		python3-pexpect \
-	&& git clone https://github.com/mozilla/rr.git \
-	&& mkdir obj \
-	&& cd obj \
-	&& cmake ../rr \
-	&& make -j8 \
-	&& make install \
+	# && git clone https://github.com/mozilla/rr.git \
+	# && mkdir obj \
+	# && cd obj \
+	# && cmake ../rr \
+	# && make -j8 \
+	# && make install \
 	&& rm -rf /var/lib/apt/lists/*
 
 
 # Add github command line
 RUN \
 	apt-get update \
-	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0 \
-	&& apt-add-repository https://cli.github.com/packages \
-	&& apt-get update \
-	&& apt-get install -y \
-		gh \
+	#&& apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0 \
+	#&& apt-add-repository https://cli.github.com/packages \
+	#&& apt-get update \
+	#&& apt-get install -y \
+	#	gh \
+    && apt-get -y install git \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Setup Pycharm
@@ -107,11 +108,14 @@ RUN \
 		python3-pytest-cov \
 		python3-rosdep \
 		python3-setuptools \
+        python3-testresources \
 		python3-vcstool \
-		wget \
+		wget 
+
 	# install some pip packages needed for testing
-	&& apt-get update \
-	&& python3 -m pip install \
+RUN \
+    apt-get update \
+	&& python3 -m pip install -U \
 		argcomplete \
 		flake8-blind-except \
 		flake8-builtins \
@@ -124,6 +128,7 @@ RUN \
 		pytest-repeat \
 		pytest-rerunfailures \
 		pytest \
+        pybind11-global \
 		setuptools \
 	# install Fast-RTPS dependencies
 	&& apt-get install --no-install-recommends -y \
@@ -139,12 +144,12 @@ RUN \
 	&& vcs import src < ros2.repos \
 	# install package dependencies
 	&& rosdep init \
-	&& rosdep update \
+	&& rosdep update --include-eol-distros \
 	&& rosdep install --from-paths src --ignore-src --rosdistro foxy -y --skip-keys "console_bridge fastcdr fastrtps rti-connext-dds-5.3.1 urdfdom_headers" \
 	# setup bloom for making releases
-	&& apt-get install -y \
-		python3-catkin-pkg \
-		python3-bloom \
+	#&& apt-get install -y \
+	#	python3-catkin-pkg \
+	#	python3-bloom \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Build the ROS2 workspace

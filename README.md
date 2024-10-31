@@ -4,6 +4,9 @@ Introductory robotics class in Gazebo with ROS 2.
 Prerequisites: Ubuntu
 
 ## Running the docker container
+
+TODO: What if instead of docker, I ran one sim on my computer, they connect to the ros network, subscribe and build their own publisher?
+
 1. Install [Docker](https://docs.docker.com/engine/install/ubuntu/) and [Rocker](https://github.com/osrf/rocker), which enables x11 support for Docker. It can be installed with: 
 ```$ sudo apt-get install python3-rocker```
 

@@ -5,6 +5,7 @@ Prerequisites:
 - Ubuntu 24.04
 - ROS 2 Jazzy
 - Gazebo Harmonic
+- [ros_gz](https://github.com/gazebosim/ros_gz)
 
 ## Startup gazebo simulation environment:
 ```$ gz sim gazebo/class-world-v2.sdf```
